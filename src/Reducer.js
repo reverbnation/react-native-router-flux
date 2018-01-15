@@ -310,6 +310,9 @@ function reducer({ initialState, scenes }) {
       if (ActionMap[action.type] === ActionConst.REFRESH) {
         let key = action.key;
         let child = findElement(state, key, action.type) || state.scenes[key];
+        if (!child) {
+          return state;
+        }
         let sceneKey = child.sceneKey;
         if (child.base) {
           child = { ...state.scenes[child.base], ...child };
